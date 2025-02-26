@@ -12,7 +12,7 @@ int main(){
     //Initialize variables
     int points = 100;
     int rand1 = 150;
-    int rand2 = 300;
+    int rand2 = 130;
     string userName;
     int getOper;
     int counter = 0;
@@ -30,7 +30,7 @@ int main(){
     
 
     //Making a multistring output to the screen
-    string OperationMultiString = "1.ADD\n"
+    string OperationMultiString = "\n1.ADD\n"
                             "2.Subtract\n"
                             "3.DISPLAY\n"
                             "4.GIVEUP\n"
@@ -84,7 +84,7 @@ int main(){
             // Subtracts the two random numbers and checks if the user guess is an absolute difference less than 5
             case SUBTRACT:
                 int guessDiff;
-                cout << " Enter your guess diference: ";
+                cout << "Enter your guess diference: ";
                 cin >> guessDiff;
 
                 correct_answer = rand1 - rand2;
@@ -105,9 +105,14 @@ int main(){
                         cout << "Goodbye, " << userName << endl;
                         playAgain = false;
                     }
+                }else{
+                    cout << "Wrong guess" << endl;
+                    points--;
+                    cout << "Your updated points are: " << points << "\n" << endl; 
                 }
 
             break;
+
                 /*
                 Displays the first random number and if he asks again we tell the user that he or she already
                 has displayed the first number, then print the first number agan
@@ -116,8 +121,10 @@ int main(){
 
             case DISPLAY:
                 if(counter == 0){
-                    cout << "The first random number is: " << rand1 << endl;
                     points -= 3;
+                    cout << "Your final points are: " << points << endl;
+                    cout << "The first random number is: " << rand1 << endl;
+                    
                 }else{
                     cout << "You have already displayed the first number." << endl;
                     cout << "The first random number is: " << rand1 << endl;
@@ -125,17 +132,42 @@ int main(){
                 counter++;
                 break;
 
+                /*
+                The user gives up and is being promted if he wants to play again.
+                */
+
             case GIVEUP:
+
+                cout << "Do you want to restart the game? Y/N: ";
+                cin >> YON;
+
+                if(toupper(YON) == 'Y'){
+                    playAgain = true;
+                    cout << " Your two numbers have been generated." << endl;
+                }else if (toupper(YON) == 'N'){
+                    
+                    cout << "Your final points are: " << points << endl;
+                    cout << "Goodbye, " << userName << endl;
+                    playAgain = false;
+                }
+
             break;
+
+            // If the user tries to exit the program, the final points are displayed and the program ends.
+
             case EXIT:
                 cout << "Your final points are: " << points << endl;
                 cout << "Goodbye, " << userName << endl;
                 playAgain = false;
             break;
+            default:
+            cout << "Invalid choice. Please try again." << endl;
+            break;
+        }
 
-    }
     }while(playAgain);
 
     return 0;    
-}
+    }
+
 
